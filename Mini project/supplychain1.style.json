@@ -1,0 +1,85 @@
+[{
+  "_id": 987621,
+  "availability": {
+    "amount": "0"
+  },
+  "material_composition": [
+    {
+      "composition": 50,
+      "m_id": "987631"
+    },
+    {
+      "composition": 50,
+      "m_id": "987632"
+    }
+  ],
+  "required_certificate": "NA",
+  "season": "ss23",
+  "style_number": "MK-080013",
+  "supplier_name": "ABCworks",
+  "type": "garment",
+  "facility_name": "ri textiles LTD",
+  "style_name": "PDH man piedras 100ml",
+  "style_uid": "080013-0065432",
+  "year": "2023"
+},
+{
+  "_id": 987622,
+  "availability": {
+    "amount": "0"
+  },
+  "facility_name": "si texttiles LTD",
+  "material_composition": [
+    {
+      "composition": 20,
+      "m_id": "987632"
+    },
+    {
+      "composition": 60,
+      "m_id": "987631"
+    },
+    {
+      "composition": 20,
+      "m_id": "987633"
+    }
+  ],
+  "required_certificate": "NA",
+  "season": "ss24",
+  "style_name": "PSH man piedras 100ml",
+  "style_number": "AK-080033",
+  "style_uid": "080023-0069432",
+  "supplier_name": "Aworks",
+  "type": "garment",
+  "year": "2024",
+  "_class": "com.example.supply_chain.model.style"
+},
+{
+  "_id": 987623,
+  "availability": {
+    "amount": "0"
+  },
+  "facility_name": "fi texttiles LTD",
+  "material_composition": [
+    {
+      "composition": 20,
+      "m_id": "987634"
+    },
+    {
+      "composition": 40,
+      "m_id": "987635"
+    },
+    {
+      "composition": 40,
+      "m_id": "987631"
+    }
+  ],
+  "required_certificate": "NA",
+  "season": "ss23",
+  "style_name": "PFG man piedras 100ml",
+  "style_number": "FK-080033",
+  "style_uid": "080013-0019432",
+  "supplier_name": "Fworks",
+  "type": "food",
+  "year": "2023",
+  "_class": "com.example.supply_chain.model.style"
+}]

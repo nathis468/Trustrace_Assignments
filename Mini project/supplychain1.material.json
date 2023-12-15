@@ -1,0 +1,25 @@
+[{
+  "_id": 987651,
+  "availability": {
+    "amount": "0"
+  },
+  "material_number": "NA",
+  "name": "hki piedras",
+  "number": "080012-3",
+  "required_certificate": [
+    "NA"
+  ],
+  "season": "ss23",
+  "supplier_id": "987631",
+  "supplier_material_name": "NA",
+  "facilities_uid": [
+    "987611"
+  ],
+  "material_composition": [
+    ""
+  ],
+  "material_uid": "080012-765432-3",
+  "RM_supplier_name": "",
+  "type": "raw_materials",
+  "year": "2023"
+}]
