@@ -26,11 +26,11 @@ public class StyleServiceImpl implements StyleService {
         return repo.findAll();
     }
 
-    public Optional<Style> getById(long _id){
+    public Optional<Style> getById(String _id){
         return repo.findById(_id);
     }
 
-    public void delete(long _id){
+    public void delete(String _id){
         repo.deleteById(_id);
     }
 }

@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface RawMaterialService {
     void save(RawMaterial theRawMaterial);
     void update(RawMaterial theRawMaterial);
-    void delete(long id);
+    void delete(String id);
     List<RawMaterial> getAllData();
-    Optional<RawMaterial> getById(long _id);
+    Optional<RawMaterial> getById(String _id);
 }

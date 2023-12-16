@@ -27,7 +27,7 @@ public class FacilitiesController {
     }
 
     @GetMapping("/databyid/{_id}")
-    public ResponseEntity<Optional<Facilities>> GetById(@PathVariable long _id){
+    public ResponseEntity<Optional<Facilities>> GetById(@PathVariable String _id){
         try{
             return new ResponseEntity<Optional<Facilities>>(facilitiesService.getById(_id),HttpStatus.OK);
         }
@@ -62,7 +62,7 @@ public class FacilitiesController {
     }
 
     @DeleteMapping("/delete/{_id}")
-    public ResponseEntity<String> delete(@PathVariable long _id){
+    public ResponseEntity<String> delete(@PathVariable String _id){
         try {
             if (facilitiesService.getById((_id)).isPresent()) {
                 facilitiesService.delete(_id);

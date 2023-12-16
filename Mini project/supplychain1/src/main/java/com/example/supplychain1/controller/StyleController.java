@@ -28,7 +28,7 @@ public class StyleController {
     }
 
     @GetMapping("/databyid/{_id}")
-    public ResponseEntity<Optional<Style>> GetById(@PathVariable long _id){
+    public ResponseEntity<Optional<Style>> GetById(@PathVariable String _id){
         try{
             return new ResponseEntity<Optional<Style>>(styleService.getById(_id),HttpStatus.OK);
         }
@@ -63,7 +63,7 @@ public class StyleController {
     }
 
     @DeleteMapping("/delete/{_id}")
-    public ResponseEntity<String> delete(@PathVariable long _id){
+    public ResponseEntity<String> delete(@PathVariable String _id){
         try {
             if (styleService.getById((_id)).isPresent()) {
                 styleService.delete(_id);

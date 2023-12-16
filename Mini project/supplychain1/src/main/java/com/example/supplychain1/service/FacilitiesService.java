@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface FacilitiesService {
     void save(Facilities theFacilities);
     void update(Facilities theFacilities);
-    void delete(long id);
+    void delete(String id);
     List<Facilities> getAllData();
-    Optional<Facilities> getById(long id);
+    Optional<Facilities> getById(String id);
 }

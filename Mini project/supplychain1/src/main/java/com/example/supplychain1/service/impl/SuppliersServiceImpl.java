@@ -27,11 +27,12 @@ public class SuppliersServiceImpl implements SuppliersService {
         return repo.findAll();
     }
 
-    public Optional<Suppliers> getById(long _id){
+    public Optional<Suppliers> getById(String _id){
         return repo.findById(_id);
     }
 
-    public void delete(long _id){
+    public Boolean delete(String _id){
         repo.deleteById(_id);
+        return true;
     }
 }

@@ -1,8 +1,6 @@
 package com.example.supplychain1.model;
 
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
@@ -10,11 +8,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.ArrayList;
 
-@Document(collection="material")
+@Document(collection="style")
 @Data
 public class Style {
     @Id
-    private long _id;
+    private String _id;
     public Availability availability;
 
     @Field("facility_name")
@@ -43,17 +41,5 @@ public class Style {
     private String type;
     private String year;
 
-
-    @Data
-    public static class Availability{
-        private String amount;
-    }
-
-    @Data
-    public static class Material{
-        @Field("m_id")
-        @DocumentReference(collection="material")
-        private Material mid;
-        private int composition;
-    }
 }
+

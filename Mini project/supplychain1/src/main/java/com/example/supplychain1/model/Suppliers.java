@@ -1,6 +1,8 @@
 package com.example.supplychain1.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
@@ -8,18 +10,16 @@ import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document(collection="suppliers")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Suppliers {
     @Id
-    private long _id;
+    private String _id;
 
     @Field("email_id")
     private String emailId;
 
     private String facilities;
-
-    @Field("facility_id")
-    @DocumentReference(collection="facilities")
-    private Facilities facilityId;
 
     private Location location;
 
@@ -36,14 +36,8 @@ public class Suppliers {
 
     @Field("supplier_uid")
     private String supplierUid;
+
     private String tier;
 
-    @Data
-    public static class Location{
-        private String address;
-        private String country;
-        private String pincode;
-        private String region;
-        private String state;
-    }
+
 }

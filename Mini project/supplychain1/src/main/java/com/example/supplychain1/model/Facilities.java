@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @Data
 public class Facilities {
     @Id
-    private long _id;
+    private String _id;
 
     private ArrayList<String> certifications;
 

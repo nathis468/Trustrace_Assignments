@@ -7,5 +7,5 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface RawMaterialRepository extends MongoRepository<RawMaterial, Long> {
+public interface RawMaterialRepository extends MongoRepository<RawMaterial, String> {
 }

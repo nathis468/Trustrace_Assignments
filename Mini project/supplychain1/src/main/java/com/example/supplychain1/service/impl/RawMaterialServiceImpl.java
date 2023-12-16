@@ -30,11 +30,11 @@ public class RawMaterialServiceImpl implements RawMaterialService {
         return theDetails;
     }
 
-    public Optional<RawMaterial> getById(long _id){
+    public Optional<RawMaterial> getById(String _id){
         return repo.findById(_id);
     }
 
-    public void delete(long _id){
+    public void delete(String _id){
         repo.deleteById(_id);
     }
 

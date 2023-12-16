@@ -12,7 +12,7 @@ import java.util.ArrayList;
 @Data
 public class RawMaterial {
     @Id
-    private long _id;
+    private String _id;
 
     private Availability availability;
     @Data

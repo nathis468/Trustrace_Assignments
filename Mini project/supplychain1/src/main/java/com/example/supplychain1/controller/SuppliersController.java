@@ -2,6 +2,8 @@ package com.example.supplychain1.controller;
 
 import com.example.supplychain1.model.Suppliers;
 import com.example.supplychain1.service.SuppliersService;
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
+import org.bson.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ public class SuppliersController {
     }
 
     @GetMapping("/databyid/{_id}")
-    public ResponseEntity<Optional<Suppliers>> GetById(@PathVariable long _id){
+    public ResponseEntity<Optional<Suppliers>> GetById(@PathVariable String _id){
         try{
             return new ResponseEntity<Optional<Suppliers>>(suppliersService.getById(_id),HttpStatus.OK);
         }
@@ -62,18 +64,18 @@ public class SuppliersController {
     }
 
     @DeleteMapping("/delete/{_id}")
-    public ResponseEntity<String> delete(@PathVariable long _id){
+    public ResponseEntity<Boolean> delete(@PathVariable String _id){
         try {
             if (suppliersService.getById((_id)).isPresent()) {
                 suppliersService.delete(_id);
-                return new ResponseEntity<String>("Deleted successfully",HttpStatus.OK);
+                return new ResponseEntity<>(true,HttpStatus.OK);
             }
             else{
-                return new ResponseEntity<String>( "Id not found",HttpStatus.NOT_FOUND);
+                return new ResponseEntity<>( false,HttpStatus.NOT_FOUND);
             }
         }
         catch (Exception e){
-            return new ResponseEntity<String>("Internal error",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
         }
     }
 }

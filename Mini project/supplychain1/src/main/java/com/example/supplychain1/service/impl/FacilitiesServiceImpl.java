@@ -27,11 +27,11 @@ public class FacilitiesServiceImpl implements FacilitiesService {
         return repo.findAll();
     }
 
-    public Optional<Facilities> getById(long _id){
+    public Optional<Facilities> getById(String _id){
         return repo.findById(_id);
     }
 
-    public void delete(long _id){
+    public void delete(String _id){
         repo.deleteById(_id);
     }
 }

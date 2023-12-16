@@ -27,7 +27,7 @@ public class RawMaterialController {
     }
 
     @GetMapping("/databyid/{_id}")
-    public ResponseEntity<Optional<RawMaterial>> GetById(@PathVariable long _id){
+    public ResponseEntity<Optional<RawMaterial>> GetById(@PathVariable String _id){
         try{
             return new ResponseEntity<Optional<RawMaterial>>(rawMaterialService.getById(_id),HttpStatus.OK);
         }
@@ -62,7 +62,7 @@ public class RawMaterialController {
     }
 
     @DeleteMapping("/delete/{_id}")
-    public ResponseEntity<String> delete(@PathVariable long _id){
+    public ResponseEntity<String> delete(@PathVariable String _id){
         try {
             if (rawMaterialService.getById((_id)).isPresent()) {
                 rawMaterialService.delete(_id);

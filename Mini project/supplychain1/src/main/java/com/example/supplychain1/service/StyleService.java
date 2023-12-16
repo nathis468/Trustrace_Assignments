@@ -9,7 +9,7 @@ import java.util.Optional;
 public interface StyleService {
     void save(Style theStyle);
     void update(Style theStyle);
-    void delete(long id);
+    void delete(String id);
     List<Style> getAllData();
-    Optional<Style> getById(long id);
+    Optional<Style> getById(String id);
 }
