@@ -53,6 +53,6 @@ public class RawMaterial {
     private String rmSupplierName;
 
     private String type;
-    private String year;
 
+    private String year;
 }

@@ -6,9 +6,13 @@ import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import org.bson.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
@@ -21,11 +25,11 @@ public class SuppliersController {
     @GetMapping("/alldata")
     public ResponseEntity<List<Suppliers>> GetAllData(){
         try{
-            return new ResponseEntity<List<Suppliers>>(suppliersService.getAllData(), HttpStatus.OK);
+            return new ResponseEntity<List<Suppliers>>( suppliersService.getAllData(),HttpStatus.OK);
         }
         catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ArrayList<Suppliers>(Arrays.asList(new Suppliers())),HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -78,6 +82,41 @@ public class SuppliersController {
         }
         catch (Exception e){
             return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("updateImage/{_id}")
+    public ResponseEntity<Boolean> uploadImage(@PathVariable String _id, @RequestParam("image") MultipartFile file) {
+        try {
+            Optional<Suppliers> theSuppliers=suppliersService.getById(_id);
+            Suppliers theSupplier2=theSuppliers.get();
+            if(suppliersService.uploadImageToDB(theSupplier2, file))
+                return new ResponseEntity<Boolean>(true, HttpStatus.OK);
+            else
+                return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("downloadImage/{_id}")
+    public ResponseEntity<?> getImage(@PathVariable String _id) {
+        try {
+            Optional<Suppliers> theSuppliers=suppliersService.getById(_id);
+            Suppliers theSupplier2=theSuppliers.get();
+            if(theSupplier2!= new Suppliers())
+                return ResponseEntity.status(HttpStatus.OK)
+                        .contentType(MediaType.valueOf("image/jpeg"))
+                        .body(suppliersService.downloadImage(theSupplier2));
+                // return new ResponseEntity<>(, HttpStatus.OK);
+            else
+                return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
         }
     }
 }

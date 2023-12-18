@@ -38,4 +38,7 @@ public class Suppliers {
     private String supplierUid;
 
     private String tier;
+
+    @Field("image_file_path")
+    private String imageFilePath;
 }
