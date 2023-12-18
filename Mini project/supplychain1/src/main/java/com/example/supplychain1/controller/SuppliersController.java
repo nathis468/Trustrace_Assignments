@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/suppliers")
@@ -31,48 +32,49 @@ public class SuppliersController {
     @GetMapping("/databyid/{_id}")
     public ResponseEntity<Optional<Suppliers>> GetById(@PathVariable String _id){
         try{
-            return new ResponseEntity<Optional<Suppliers>>(suppliersService.getById(_id),HttpStatus.OK);
+            Optional<Suppliers> storeSuppliers=suppliersService.getById(_id);
+            if(suppliersService.getById((_id)).isPresent()){
+                return new ResponseEntity<>(storeSuppliers,HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>(Optional.of(new Suppliers()),HttpStatus.NOT_FOUND);
+            }
         }
         catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Optional.of(new Suppliers()),HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<String> InsertData(@RequestBody Suppliers theSuppliers){
+    public ResponseEntity<Suppliers> InsertData(@RequestBody Suppliers theSuppliers){
         try{
-            suppliersService.save(theSuppliers);
-            return new ResponseEntity<String> ("Document inserted successfully", HttpStatus.OK);
+            suppliersService.insert(theSuppliers);
+            return new ResponseEntity<Suppliers> (theSuppliers, HttpStatus.OK);
         }
         catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity<String> ("Internal Error", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Suppliers> (new Suppliers(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> UpdateData(@RequestBody Suppliers theSuppliers){
+    public ResponseEntity<Suppliers> UpdateData(@RequestBody Suppliers theSuppliers){
         try{
-            suppliersService.save(theSuppliers);
-            return new ResponseEntity<String>("Updated document successfully",HttpStatus.OK);
+            suppliersService.update(theSuppliers);
+            return new ResponseEntity<Suppliers> (theSuppliers, HttpStatus.OK);
         }
         catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity<String>( "Internal error",HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Suppliers> (new Suppliers(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/delete/{_id}")
     public ResponseEntity<Boolean> delete(@PathVariable String _id){
         try {
-            if (suppliersService.getById((_id)).isPresent()) {
-                suppliersService.delete(_id);
-                return new ResponseEntity<>(true,HttpStatus.OK);
-            }
-            else{
-                return new ResponseEntity<>( false,HttpStatus.NOT_FOUND);
-            }
+            suppliersService.delete(_id);
+            return new ResponseEntity<>(true,HttpStatus.OK);
         }
         catch (Exception e){
             return new ResponseEntity<>(false,HttpStatus.BAD_REQUEST);

@@ -10,9 +10,12 @@ import java.util.ArrayList;
 
 @Document(collection="style")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Style {
     @Id
     private String _id;
+
     public Availability availability;
 
     @Field("facility_name")
@@ -39,6 +42,7 @@ public class Style {
     private String supplierName;
 
     private String type;
+
     private String year;
 
 }

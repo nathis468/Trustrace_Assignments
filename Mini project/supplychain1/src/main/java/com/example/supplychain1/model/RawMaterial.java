@@ -1,6 +1,8 @@
 package com.example.supplychain1.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
@@ -10,20 +12,19 @@ import java.util.ArrayList;
 
 @Document(collection="material")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class RawMaterial {
     @Id
     private String _id;
 
     private Availability availability;
-    @Data
-    public static class Availability{
-        private String amount;
-    }
 
     @Field("material_number")
     private String materialNumber;
 
     private String name;
+
     private String number;
 
     @Field("required_certificate")

@@ -38,6 +38,4 @@ public class Suppliers {
     private String supplierUid;
 
     private String tier;
-
-
 }

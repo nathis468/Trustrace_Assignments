@@ -15,12 +15,26 @@ public class SuppliersServiceImpl implements SuppliersService {
     @Autowired
     SuppliersRepository repo;
 
-    public void save(Suppliers theSuppliers){
-        repo.save(theSuppliers);
+    public Suppliers insert(Suppliers theSuppliers){
+        Suppliers newSuppliers=new Suppliers();
+        try{
+            newSuppliers= repo.save(theSuppliers);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return newSuppliers;
     }
 
-    public void update(Suppliers theSuppliers){
-        repo.save(theSuppliers);
+    public Suppliers update(Suppliers theSuppliers){
+        Suppliers newSuppliers=new Suppliers();
+        try{
+            newSuppliers= repo.save(theSuppliers);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return newSuppliers;
     }
 
     public List<Suppliers> getAllData(){
@@ -28,11 +42,23 @@ public class SuppliersServiceImpl implements SuppliersService {
     }
 
     public Optional<Suppliers> getById(String _id){
-        return repo.findById(_id);
+        try {
+            return repo.findById(_id);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public Boolean delete(String _id){
-        repo.deleteById(_id);
-        return true;
+        try{
+            repo.deleteById(_id);
+            return true;
+        }
+        catch(Exception e){
+            e.printStackTrace();
+            return false;
+        }
     }
 }
