@@ -35,12 +35,11 @@ public class SuppliersServiceImpl implements SuppliersService {
         Suppliers newSuppliers=new Suppliers();
         try{
             newSuppliers= repo.save(theSuppliers);
-            return theSuppliers;
         }
         catch(Exception e){
             e.printStackTrace();
-            return newSuppliers;
         }
+        return newSuppliers;
     }
 
     public List<Suppliers> getAllData(){
@@ -65,7 +64,7 @@ public class SuppliersServiceImpl implements SuppliersService {
 
     public Boolean delete(String _id){
         try{
-            repo.deleteById(_id);
+            repo.deleteBy_id(_id);
             return true;
         }
         catch(Exception e){
@@ -80,16 +79,18 @@ public class SuppliersServiceImpl implements SuppliersService {
             String filePath="C:\\Trustrace\\Assignments\\Mini project\\supplychain1\\src\\main\\java\\com\\example\\supplychain1\\images"+file.getOriginalFilename();
             theSuppliers.setImageFilePath(filePath);
             file.transferTo(new File(filePath));
-            if(insert(theSuppliers)!=null)
+            if(update(theSuppliers)!=null) {
                 return true;
-            else
+            }
+            else {
                 return false;
-        } catch (Exception e) {
+            }
+        }
+        catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
         }
-
     }
 
     @Override
