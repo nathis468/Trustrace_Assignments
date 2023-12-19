@@ -12,8 +12,6 @@ public interface SuppliersService {
     Boolean delete(String id);
     List<Suppliers> getAllData();
     Optional<Suppliers> getById(String id);
-
     Boolean uploadImageToDB(Suppliers theSuppliers , MultipartFile file);
-
     byte[] downloadImage(Suppliers theSuppliers);
 }

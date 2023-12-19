@@ -3,6 +3,7 @@ package com.example.supplychain1.service.impl;
 import com.example.supplychain1.model.Suppliers;
 import com.example.supplychain1.repository.SuppliersRepository;
 import com.example.supplychain1.service.SuppliersService;
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -77,9 +77,11 @@ public class SuppliersServiceImpl implements SuppliersService {
     public Boolean uploadImageToDB(Suppliers theSuppliers ,MultipartFile file) {
         try {
             String filePath="C:\\Trustrace\\Assignments\\Mini project\\supplychain1\\src\\main\\java\\com\\example\\supplychain1\\images"+file.getOriginalFilename();
-            theSuppliers.setImageFilePath(filePath);
-            file.transferTo(new File(filePath));
-            if(update(theSuppliers)!=null) {
+
+            if(isImageByExtension(filePath)) {
+                theSuppliers.setImageFilePath(filePath);
+                file.transferTo(new File(filePath));
+                update(theSuppliers);
                 return true;
             }
             else {
@@ -87,7 +89,6 @@ public class SuppliersServiceImpl implements SuppliersService {
             }
         }
         catch (Exception e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return false;
         }
@@ -101,10 +102,17 @@ public class SuppliersServiceImpl implements SuppliersService {
                 return null;
             byte[] images = Files.readAllBytes(new File(filePath).toPath());
             return images;
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
+        }
+        catch (IOException e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    public boolean isImageByExtension(String filePath) {
+        Tika theTika = new Tika();
+        String imageType = theTika.detect(filePath);
+        return imageType != null && imageType.startsWith("image");
     }
 }

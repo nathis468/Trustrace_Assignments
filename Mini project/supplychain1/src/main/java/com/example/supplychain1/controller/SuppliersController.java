@@ -88,14 +88,17 @@ public class SuppliersController {
     @PutMapping("updateImage/{_id}")
     public ResponseEntity<Boolean> uploadImage(@PathVariable String _id, @RequestParam("image") MultipartFile file) {
         try {
+            if(file.isEmpty()){
+                throw new Exception();
+            }
             Optional<Suppliers> theSuppliers=suppliersService.getById(_id);
             Suppliers theSupplier2=theSuppliers.get();
             if(suppliersService.uploadImageToDB(theSupplier2, file))
                 return new ResponseEntity<Boolean>(true, HttpStatus.OK);
             else
-                return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
+                return new ResponseEntity<Boolean>(false, HttpStatus.UNSUPPORTED_MEDIA_TYPE);
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
         }

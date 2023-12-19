@@ -26,7 +26,7 @@ public class SuppliersServiceTest {
     private SuppliersServiceImpl service;
 
     @Test
-    public void testThatFacilityCanGetAllData() throws Exception {
+    public void testThatSuppliersCanGetAllData() throws Exception {
         Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
         Mockito.when(repo.findAll()).thenReturn(List.of(newSuppliers));
         List<Suppliers> result = service.getAllData();
@@ -34,7 +34,7 @@ public class SuppliersServiceTest {
     }
 
     @Test
-    public void testThatFacilityCanNotGetAllData() throws Exception {
+    public void testThatSuppliersCanNotGetAllData() throws Exception {
         Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
         Mockito.when(repo.findAll()).thenThrow(RuntimeException.class);
         List<Suppliers> result = service.getAllData();
@@ -42,7 +42,7 @@ public class SuppliersServiceTest {
     }
 
     @Test
-    public void testThatFacilityCanbeCreated() throws Exception {
+    public void testThatSuppliersCanbeCreated() throws Exception {
         Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
         Mockito.when(repo.save(newSuppliers)).thenReturn(newSuppliers);
         Suppliers result = service.insert(newSuppliers);
@@ -50,7 +50,7 @@ public class SuppliersServiceTest {
     }
 
     @Test
-    public void testThatFacilityCanNotbeCreated() throws Exception {
+    public void testThatSuppliersCanNotbeCreated() throws Exception {
         Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
         Mockito.when(repo.save(newSuppliers)).thenThrow(RuntimeException.class);
         Suppliers result = service.insert(newSuppliers);
@@ -58,7 +58,7 @@ public class SuppliersServiceTest {
     }
 
     @Test
-    public void testThatFacilityCanGetById() throws Exception {
+    public void testThatSuppliersCanGetById() throws Exception {
         Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
         Mockito.when(repo.findById("cd")).thenReturn(Optional.of(newSuppliers));
         Optional<Suppliers> result = service.getById("cd");
@@ -66,7 +66,7 @@ public class SuppliersServiceTest {
     }
 
     @Test
-    public void testThatFacilityCanNotGetById() throws Exception {
+    public void testThatSuppliersCanNotGetById() throws Exception {
         Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
         Mockito.when(repo.findById("snffdk")).thenThrow(RuntimeException.class);
         Optional<Suppliers> result = service.getById("snffdk");
@@ -74,7 +74,7 @@ public class SuppliersServiceTest {
     }
 
     @Test
-    public void testThatFacilityCanUpdate() throws Exception {
+    public void testThatSuppliersCanUpdate() throws Exception {
         Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
         Mockito.when(repo.save(newSuppliers)).thenReturn(newSuppliers);
         Suppliers result = service.update(newSuppliers);
@@ -82,7 +82,7 @@ public class SuppliersServiceTest {
     }
 
     @Test
-    public void testThatFacilityCanNotUpdate() throws Exception {
+    public void testThatSuppliersCanNotUpdate() throws Exception {
         Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
         Mockito.when(repo.save(newSuppliers)).thenThrow(RuntimeException.class);
         Suppliers result = service.update(newSuppliers);
@@ -90,18 +90,18 @@ public class SuppliersServiceTest {
     }
 
     @Test
-    public void testThatFacilityCanDeleteById() throws Exception {
+    public void testThatSuppliersCanDeleteById() throws Exception {
         Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
         Mockito.when(repo.deleteBy_id("cd")).thenReturn(true);
         Boolean result = service.delete("cd");
-        assertEquals(true,result);
+        assertEquals(true, result);
     }
 
     @Test
-    public void testThatFacilityCanNotDeleteById() throws Exception {
+    public void testThatSuppliersCanNotDeleteById() throws Exception {
         Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
         Mockito.when(repo.deleteBy_id("cd")).thenThrow(RuntimeException.class);
         Boolean result = service.delete("cd");
-        assertEquals(false,result);
+        assertEquals(false, result);
     }
 }
