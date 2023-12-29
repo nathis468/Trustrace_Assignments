@@ -1,12 +1,16 @@
 package com.example.supplychain1.controller;
 
 import com.example.supplychain1.model.Style;
+import com.example.supplychain1.model.Suppliers;
+import com.example.supplychain1.model.Style;
 import com.example.supplychain1.service.StyleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,37 +27,43 @@ public class StyleController {
         }
         catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(new ArrayList<Style>(),HttpStatus.BAD_REQUEST);
         }
     }
 
-    @GetMapping("/databyid/{_id}")
-    public ResponseEntity<Optional<Style>> GetById(@PathVariable String _id){
+    @GetMapping("/databyid/{id}")
+    public ResponseEntity<Optional<Style>> GetById(@PathVariable("id") String _id){
         try{
-            return new ResponseEntity<Optional<Style>>(styleService.getById(_id),HttpStatus.OK);
+            Optional<Style> storeStyle=styleService.getById(_id);
+            if(styleService.getById((_id)).isPresent()){
+                return new ResponseEntity<>(storeStyle,HttpStatus.OK);
+            }
+            else{
+                return new ResponseEntity<>(Optional.of(new Style()),HttpStatus.NOT_FOUND);
+            }
         }
         catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity<>(null,HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(Optional.of(new Style()),HttpStatus.BAD_REQUEST);
         }
     }
 
     @PostMapping("/insert")
-    public ResponseEntity<String> InsertData(@RequestBody Style theStyle){
+    public ResponseEntity<Style> InsertData(@RequestBody Style theStyle){
         try{
-            styleService.save(theStyle);
-            return new ResponseEntity<String> ("Document inserted successfully", HttpStatus.OK);
+            styleService.insert(theStyle);
+            return new ResponseEntity<Style> (theStyle, HttpStatus.OK);
         }
         catch(Exception e){
             e.printStackTrace();
-            return new ResponseEntity<String> ("Internal Error", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<Style> (new Style(), HttpStatus.BAD_REQUEST);
         }
     }
 
     @PutMapping("/update")
     public ResponseEntity<String> UpdateData(@RequestBody Style theStyle){
         try{
-            styleService.save(theStyle);
+            styleService.update(theStyle);
             return new ResponseEntity<String>("Updated document successfully",HttpStatus.OK);
         }
         catch(Exception e){

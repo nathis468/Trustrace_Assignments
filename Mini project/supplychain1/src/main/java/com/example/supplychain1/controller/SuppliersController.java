@@ -2,8 +2,6 @@ package com.example.supplychain1.controller;
 
 import com.example.supplychain1.model.Suppliers;
 import com.example.supplychain1.service.SuppliersService;
-import com.fasterxml.jackson.core.io.JsonStringEncoder;
-import org.bson.json.JsonObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 @RestController
 @RequestMapping("/suppliers")
@@ -33,8 +30,8 @@ public class SuppliersController {
         }
     }
 
-    @GetMapping("/databyid/{_id}")
-    public ResponseEntity<Optional<Suppliers>> GetById(@PathVariable String _id){
+    @GetMapping("/databyid/{id}")
+    public ResponseEntity<Optional<Suppliers>> GetById(@PathVariable("id") String _id){
         try{
             Optional<Suppliers> storeSuppliers=suppliersService.getById(_id);
             if(suppliersService.getById((_id)).isPresent()){
@@ -86,7 +83,7 @@ public class SuppliersController {
     }
 
     @PutMapping("updateImage/{_id}")
-    public ResponseEntity<Boolean> uploadImage(@PathVariable String _id, @RequestParam("image") MultipartFile file) {
+    public ResponseEntity<Boolean> updateImage(@PathVariable String _id, @RequestParam("image") MultipartFile file) {
         try {
             if(file.isEmpty()){
                 throw new Exception();
@@ -105,21 +102,23 @@ public class SuppliersController {
     }
 
     @GetMapping("downloadImage/{_id}")
-    public ResponseEntity<?> getImage(@PathVariable String _id) {
+    public ResponseEntity<byte[]> getImage(@PathVariable String _id) {
         try {
-            Optional<Suppliers> theSuppliers=suppliersService.getById(_id);
-            Suppliers theSupplier2=theSuppliers.get();
-            if(theSupplier2!= new Suppliers())
+            Suppliers theSuppliers=suppliersService.getById(_id).get();
+            String path=theSuppliers.getImageFilePath();
+            System.out.println(path);
+            if(path!= null){
                 return ResponseEntity.status(HttpStatus.OK)
-                        .contentType(MediaType.valueOf("image/jpeg"))
-                        .body(suppliersService.downloadImage(theSupplier2));
-                // return new ResponseEntity<>(, HttpStatus.OK);
-            else
-                return new ResponseEntity<Boolean>(false, HttpStatus.NOT_FOUND);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
+                        .contentType(MediaType.valueOf("image/jpg"))
+                        .body(suppliersService.downloadImage(theSuppliers));
+            }
+            else{
+                return new ResponseEntity<byte[]>(new byte[1], HttpStatus.NOT_FOUND);
+            }
+        }
+        catch (Exception e) {
             e.printStackTrace();
-            return new ResponseEntity<Boolean>(false, HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<byte[]>(new byte[1], HttpStatus.BAD_REQUEST);
         }
     }
 }

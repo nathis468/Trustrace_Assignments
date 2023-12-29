@@ -15,6 +15,8 @@ import java.util.Optional;
 public class RawMaterialController {
     @Autowired
     RawMaterialService rawMaterialService;
+
+
     @GetMapping("/alldata")
     public ResponseEntity<List<RawMaterial>> GetAllData(){
         try{

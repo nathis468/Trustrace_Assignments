@@ -10,6 +10,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.mock.web.MockMultipartFile;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -103,5 +105,31 @@ public class SuppliersServiceTest {
         Mockito.when(repo.deleteBy_id("cd")).thenThrow(RuntimeException.class);
         Boolean result = service.delete("cd");
         assertEquals(false, result);
+    }
+
+    @Test
+    public void testThatUploadImageWorks() throws Exception{
+        Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
+        String name = "image";
+        String originalFileName = "img1.jpg";
+        String contentType = "image/jpg";
+        byte[] content = null;
+        MultipartFile file = new MockMultipartFile(name,originalFileName, contentType, content);
+        Mockito.when(repo.save(newSuppliers)).thenReturn(newSuppliers);
+        Boolean result = service.uploadImageToDB(newSuppliers,file);
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void testThatUploadImageNotWorks() throws Exception{
+        Suppliers newSuppliers = new Suppliers("cd", "emailid", "facilities", new Location("adrress", "country", "pincode", "region", "state"), "material_type", "raw_material", "styles", "supplier_name", "supplier_uid", "tier", "C:/Trustrace/Assignments/Mini project/supplychain1/src/main/java/com/example/supplychain1/images");
+        String name = "image";
+        String originalFileName = "img1.jpg";
+        String contentType = "image/jpg";
+        byte[] content = null;
+        MultipartFile file = new MockMultipartFile(name,originalFileName, contentType, content);
+        Mockito.when(service.update(newSuppliers)).thenThrow(RuntimeException.class);
+        Boolean result = service.uploadImageToDB(newSuppliers,file);
+        System.out.println(result);
     }
 }

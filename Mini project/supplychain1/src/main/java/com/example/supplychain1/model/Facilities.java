@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.DocumentReference;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection="facilities")
 @Data
@@ -18,7 +18,7 @@ public class Facilities {
     @Id
     private String _id;
 
-    private ArrayList<String> certifications;
+    private List<String> certifications;
 
     @Field("created_by")
     private String createdBy;

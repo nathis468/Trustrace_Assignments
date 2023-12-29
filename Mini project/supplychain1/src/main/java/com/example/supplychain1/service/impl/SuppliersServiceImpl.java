@@ -23,7 +23,7 @@ public class SuppliersServiceImpl implements SuppliersService {
     public Suppliers insert(Suppliers theSuppliers){
         Suppliers newSuppliers=new Suppliers();
         try{
-            newSuppliers= repo.save(theSuppliers);
+            newSuppliers=repo.save(theSuppliers);
         }
         catch(Exception e){
             e.printStackTrace();
@@ -77,11 +77,10 @@ public class SuppliersServiceImpl implements SuppliersService {
     public Boolean uploadImageToDB(Suppliers theSuppliers ,MultipartFile file) {
         try {
             String filePath="C:\\Trustrace\\Assignments\\Mini project\\supplychain1\\src\\main\\java\\com\\example\\supplychain1\\images"+file.getOriginalFilename();
-
             if(isImageByExtension(filePath)) {
                 theSuppliers.setImageFilePath(filePath);
-                file.transferTo(new File(filePath));
                 update(theSuppliers);
+                file.transferTo(new File(filePath));
                 return true;
             }
             else {
@@ -89,7 +88,7 @@ public class SuppliersServiceImpl implements SuppliersService {
             }
         }
         catch (Exception e) {
-            e.printStackTrace();
+            e.printStackTrace();            
             return false;
         }
     }

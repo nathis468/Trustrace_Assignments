@@ -14,8 +14,15 @@ public class StyleServiceImpl implements StyleService {
     @Autowired
     StyleRepository repo;
 
-    public void save(Style theStyle){
-        repo.save(theStyle);
+    public Style insert(Style theStyle){
+        Style newStyle=new Style();
+        try{
+            newStyle=repo.save(theStyle);
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return newStyle;
     }
 
     public void update(Style theStyle){
