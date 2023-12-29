@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,8 +23,8 @@ public class LoginController {
         return loginService.generateToken(username);
     }
 
-    @GetMapping("/validate/{name}")
+    @GetMapping("/validate/{username}")
     public String validate(@PathVariable String username,HttpServletRequest request) {
-        return loginService.validateToken(request.getHeader("Authorization").split(" ",2)[1],username);
+        return loginService.validateToken(username,request);
     }
 }
