@@ -23,7 +23,7 @@ public class LoginController {
     }
 
     @GetMapping("/validate/{name}")
-    public String getMethodName(HttpServletRequest request, @PathVariable String name) {
-        return loginService.validateToken(request.getHeader("Authorization").split(" ",2)[1],name);
+    public String getMethodName(@PathVariable String username,HttpServletRequest request) {
+        return loginService.validateToken(request.getHeader("Authorization").split(" ",2)[1],username);
     }
 }
