@@ -13,10 +13,10 @@ public class LoginService {
         return token;
     }
     public String validateToken(String username,HttpServletRequest request){
-        String tokengot = request.getHeader("Authorization");
-        tokengot=tokengot.substring(7);
+        String tokengot = request.getHeader("Authorization").substring(7);
+        System.out.println(tokengot);
         String token=generateToken(username);
-        System.out.println(token+" "+tokengot);
+        System.out.println(token);
         if(token.equals(tokengot)){
             return "Valid token";
         }

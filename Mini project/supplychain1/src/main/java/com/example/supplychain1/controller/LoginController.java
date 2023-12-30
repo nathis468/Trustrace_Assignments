@@ -1,12 +1,18 @@
 package com.example.supplychain1.controller;
 
+import javax.naming.NameNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.MethodNotAllowedException;
+import org.springframework.web.servlet.NoHandlerFoundException;
 
 import com.example.supplychain1.service.impl.LoginService;
 
@@ -26,5 +32,15 @@ public class LoginController {
     @GetMapping("/validate/{username}")
     public String validate(@PathVariable String username,HttpServletRequest request) {
         return loginService.validateToken(username,request);
+    }
+
+    @ExceptionHandler(value=RuntimeException.class)
+    public ResponseEntity<?> runTimeException(){
+        return new ResponseEntity<>("Bad Request",HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value=IllegalArgumentException.class)
+    public ResponseEntity<?> illegalArgumentException(){
+        return new ResponseEntity<>("Illegal Argument",HttpStatus.BAD_REQUEST);
     }
 }
