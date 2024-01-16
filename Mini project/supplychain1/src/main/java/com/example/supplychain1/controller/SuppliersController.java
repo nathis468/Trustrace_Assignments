@@ -47,8 +47,6 @@ public class SuppliersController {
         }
     }
     
- 
-
     @PostMapping("/insert")
     public ResponseEntity<Suppliers> InsertData(@RequestBody Suppliers theSuppliers){
         try{
